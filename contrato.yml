@@ -1,0 +1,379 @@
+openapi: 3.0.0
+info:
+  title: API de Operaciones de los Pagos
+  version: v1
+  description: API para procesar pagos y consultar su estado.
+
+servers:
+  - url: http://localhost:8080/
+
+paths:
+  /pagos/estatus/{folio}:
+    get:
+      summary: Consulta el estado de un pago por su folio.
+      tags: [Operaciones]
+      parameters:
+        - in: path
+          name: folio
+          required: true
+          schema:
+            type: string
+          description: Folio único del pago a consultar (alfanumérico, sin guiones).
+      responses:
+        '200':
+          description: Consulta de estatus exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: Operación exitosa
+                    description: Mensaje de éxito.
+                  folio:
+                    type: string
+                    example: 1234asvdsv
+                    description: Folio único de la transacción.
+                  resultado:
+                    type: object
+                    properties:
+                      estatusPago:
+                        type: string
+                        example: En Proceso
+                        description: Estado de la operación
+        '400':
+          description: Error en la solicitud del cliente (folio inválido).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codigo:
+                    type: string
+                    example: 400.banco-base-operaciones-pagos.4004
+                    description: Código de error.
+                  mensaje:
+                    type: string
+                    example: Falta campo obligatorio
+                    description: Descripción del error.
+                  folio:
+                    type: string
+                    example: 1234sdvd
+                    description: Folio de la transacción (puede estar presente si se generó).
+                  info:
+                    type: string
+                    example: https://banco.base.mx/info#400.banco-base-operaciones-pagos.4004
+                    description: Enlace a información adicional sobre el error.
+                  detalle:
+                    type: string
+                    example: Falta el campo idCliente
+                    description: Detalle específico del error 
+        '404':
+          description: No se encontró pago con el folio proporcionado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codigo:
+                    type: string
+                    example:  404.banco-base-operaciones-pagos.4404
+                    description: Código de error.
+                  mensaje:
+                    type: string
+                    example: No se encontro el folio
+                    description: Descripción del error.
+                  folio:
+                    type: string
+                    example: 134adsfka
+                    description: Folio de la transacción.
+                  info:
+                    type: string
+                    example: https://banco.base.mx/info#404.banco-base-operaciones-pagos.4404
+                    description: Enlace a información adicional sobre el error.
+                  detalle:
+                    type: string
+                    example: No se encontro el {folio}
+                    description: Detalle específico del error 
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codigo:
+                    type: string
+                    example: 500.banco-base-operaciones-pagos.0001
+                    description: Código de error interno.
+                  mensaje:
+                    type: string
+                    example: Problemas al procesar su solicitud, favor de contactar a su administrador
+                    description: Mensaje de error interno.
+                  folio:
+                    type: string
+                    example: 3234rfavddad
+                    description: Folio de la transacción (puede estar presente si se generó).
+                  info:
+                    type: string
+                    example: https://banco.base.mx/info#500.banco-base-operaciones-pagos.0001
+                    description: Enlace a información adicional sobre el error interno.
+                  detalles:
+                    type: array
+                    items:
+                      type: string
+                      example: Error interno en el servidor
+                      description: Detalles adicionales del error.
+    put:
+      summary: Consulta el estado de un pago por su folio.
+      tags: [Operaciones]
+      parameters:
+        - in: path
+          name: folio
+          required: true
+          schema:
+            type: string
+          description: Folio único del pago a consultar (alfanumérico, sin guiones).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - estatusPago
+              properties:
+                estatusPago:
+                  type: string
+                  example: Cancelado
+                  description: Estatus del pago.
+      responses:
+        '200':
+          description: Consulta de estatus exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: Operación exitosa
+                    description: Mensaje de éxito.
+                  folio:
+                    type: string
+                    example: 1234asvdsv
+                    description: Folio único de la transacción.
+                  resultado:
+                    type: object
+                    properties:
+                      estatusPago:
+                        type: string
+                        example: Cancelado
+                        description: Indica si se aplico el cambio del estatus.
+        '400':
+          description: Error en la solicitud del cliente (folio inválido).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codigo:
+                    type: string
+                    example: 400.banco-base-operaciones-pagos.4004
+                    description: Código de error.
+                  mensaje:
+                    type: string
+                    example: Falta campo obligatorio
+                    description: Descripción del error.
+                  folio:
+                    type: string
+                    example: 1234sdvd
+                    description: Folio de la transacción (puede estar presente si se generó).
+                  info:
+                    type: string
+                    example: https://banco.base.mx/info#400.banco-base-operaciones-pagos.4004
+                    description: Enlace a información adicional sobre el error.
+                  detalle:
+                    type: string
+                    example: Falta el campo idCliente
+                    description: Detalle específico del error 
+        '404':
+          description: No se encontró pago con el folio proporcionado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codigo:
+                    type: string
+                    example:  404.banco-base-operaciones-pagos.4404
+                    description: Código de error.
+                  mensaje:
+                    type: string
+                    example: No se encontro el folio
+                    description: Descripción del error.
+                  folio:
+                    type: string
+                    example: 134adsfka
+                    description: Folio de la transacción.
+                  info:
+                    type: string
+                    example: https://banco.base.mx/info#404.banco-base-operaciones-pagos.4404
+                    description: Enlace a información adicional sobre el error.
+                  detalle:
+                    type: string
+                    example: No se encontro el {folio}
+                    description: Detalle específico del error 
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codigo:
+                    type: string
+                    example: 500.banco-base-operaciones-pagos.0001
+                    description: Código de error interno.
+                  mensaje:
+                    type: string
+                    example: Problemas al procesar su solicitud, favor de contactar a su administrador
+                    description: Mensaje de error interno.
+                  folio:
+                    type: string
+                    example: 3234rfavddad
+                    description: Folio de la transacción (puede estar presente si se generó).
+                  info:
+                    type: string
+                    example: https://banco.base.mx/info#500.banco-base-operaciones-pagos.0001
+                    description: Enlace a información adicional sobre el error interno.
+                  detalles:
+                    type: array
+                    items:
+                      type: string
+                      example: Error interno en el servidor
+                      description: Detalles adicionales del error.
+  /pagos:
+    post:
+      summary: Registra una nueva operacion.
+      tags: [Operaciones]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - idCliente
+                - monto
+                - concepto
+                - cantidadProductos
+                - emisor
+                - receptor
+              properties:
+                idCliente:
+                  type: string
+                  example: 1234abcd
+                  description: Identificador del cliente.
+                monto:
+                  type: number
+                  example: 125.00
+                  description: Monto de la operación.
+                concepto:
+                  type: string
+                  example: Compra de un seguro
+                  description: Descripción de la operación.
+                cantidadProductos:
+                  type: number
+                  example: 1
+                  description: Cantidad de productos comprados.
+                emisor:
+                  type: string
+                  example: BBVA
+                  description: Banco Emisor del pago.
+                receptor:
+                  type: string
+                  example: Banco Base
+                  description: Banco receptor de la operación.
+      responses:
+        '200':
+          description: Operación exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: Operación exitosa
+                    description: Mensaje de éxito.
+                  folio:
+                    type: string
+                    example: 1234asvdsv
+                    description: Folio único de la transacción.
+                  resultado:
+                    type: object
+                    properties:
+                      estatus:
+                        type: string
+                        example: Pendiente
+                        description: Estado de la operación 
+        '400':
+          description: Error en la solicitud del cliente (validación).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codigo:
+                    type: string
+                    example: 400.banco-base-operaciones-pagos.4004
+                    description: Código de error.
+                  mensaje:
+                    type: string
+                    example: Falta campo obligatorio
+                    description: Descripción del error.
+                  folio:
+                    type: string
+                    example: 1234sdvd
+                    description: Folio de la transacción (puede estar presente si se generó).
+                  info:
+                    type: string
+                    example: https://banco.base.mx/info#400.banco-base-operaciones-pagos.4004
+                    description: Enlace a información adicional sobre el error.
+                  detalle:
+                    type: string
+                    example: Falta el campo idCliente
+                    description: Detalle específico del error 
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codigo:
+                    type: string
+                    example: 500.banco-base-operaciones-pagos.0001
+                    description: Código de error interno.
+                  mensaje:
+                    type: string
+                    example: Problemas al procesar su solicitud, favor de contactar a su administrador
+                    description: Mensaje de error interno.
+                  folio:
+                    type: string
+                    example: 3234rfavddad
+                    description: Folio de la transacción (puede estar presente si se generó).
+                  info:
+                    type: string
+                    example: https://banco.base.mx/info#500.banco-base-operaciones-pagos.0001
+                    description: Enlace a información adicional sobre el error interno.
+                  detalles:
+                    type: array
+                    items:
+                      type: string
+                      example: Error interno en el servidor
+                      description: Detalles adicionales del error.
+
+
