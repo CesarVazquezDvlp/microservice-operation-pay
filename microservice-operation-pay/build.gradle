@@ -2,8 +2,6 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.5'
 	id 'io.spring.dependency-management' version '1.1.7'
-	id 'java'
-	id 'com.github.dockerjava.dockerjava' version '3.3.1'
 }
 
 group = 'com.microservice.operation.pay'
@@ -36,31 +34,4 @@ tasks.withType(JavaCompile) {
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-def dockerImageName = 'microservice-operation-pay'
-def dockerfilePath = file('Dockerfile').path // Ruta al Dockerfile
-
-task createDockerfile {
-    doLast {
-        def dockerFileContent = """
-            FROM eclipse-temurin:17-jre
-            VOLUME /tmp
-            COPY build/libs/microservice-operation-pay-0.0.1-SNAPSHOT.jar app.jar
-            ENTRYPOINT ["java","-jar","/app.jar"]
-        """.stripIndent()
-        file('Dockerfile').text = dockerFileContent
-    }
-}
-
-tasks.named('docker').configure {
-    dependsOn createDockerfile
-}
-
-docker {
-    name = dockerImageName
-    dockerfile = dockerfilePath
-    buildArgs = [
-            "JAR_FILE": "microservice-operation-pay-0.0.1-SNAPSHOT.jar"
-    ]
 }
