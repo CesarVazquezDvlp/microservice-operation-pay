@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.microservice.operation.pay.rabbit.RabbitMQMessageProducer;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.microservice.operation.pay.model.EstatusPago;
 import com.microservice.operation.pay.model.Pago;
 import com.microservice.operation.pay.model.PagoRequest;
@@ -42,9 +45,12 @@ public class PagosController {
     private static final String METHOD_NAME_CAMBIAR_ESTATUS = "actualizaEstatus";
         
     private final PagoRepository pagoRepository;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
-    public PagosController(PagoRepository pagoRepository) {
+    @Autowired
+    public PagosController(PagoRepository pagoRepository, RabbitMQMessageProducer rabbitMQMessageProducer) {
         this.pagoRepository = pagoRepository;
+        this.rabbitMQMessageProducer = rabbitMQMessageProducer;
     }
     
 	@PostMapping
@@ -182,7 +188,11 @@ public class PagosController {
                 long tiempoGuardado = stopWatchGuardado.getTotalTimeMillis();
                 logger.info("({}) {} - {} - Trace: {}. Pago con folio: {} actualizado. Estatus anterior: {}, Nuevo estatus: {}. Tiempo de guardado: {} ms.", folio, SERVICE_NAME, METHOD_NAME_CAMBIAR_ESTATUS, trace, folio, estatusAnterior, nuevoEstatus, tiempoGuardado);
 
-                // Aquí iría la lógica para notificar a RabbitMQ (Punto 2)
+                Map<String, String> message = new HashMap<>();
+                message.put("folio", folio);
+                message.put("nuevoEstatus", nuevoEstatus.getValor());
+
+                rabbitMQMessageProducer.sendMessage(message);
 
                 Map<String, String> resultado = new HashMap<>();
                 resultado.put("folio", folio);
