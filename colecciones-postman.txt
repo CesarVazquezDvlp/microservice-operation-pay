@@ -1,0 +1,17 @@
+curl --location 'http://localhost:8080/actuator/health'
+curl --location --request POST 'http://localhost:8080/pagos' \
+--header 'Content-Type: application/json' \
+--data '{
+    "idCliente": "we5533gg",
+    "concepto": "Compra de servicios financieron",
+    "cantidadProductos": 15,
+    "emisor": "BAZ",
+    "receptor": "BB",
+    "monto": 250.50
+}'
+curl --location 'http://localhost:8080/pagos/estatus/f5e7d1226d4c425494273e873bc00d2b'
+curl --location --request PUT 'http://localhost:8080/pagos/estatus/f5e7d1226d4c425494273e873bc00d2b' \
+--header 'Content-Type: application/json' \
+--data '{
+    "estatusPago":"Aplicado"
+}'
