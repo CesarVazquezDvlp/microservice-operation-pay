@@ -1,0 +1,102 @@
+[{
+  "_id": {
+    "$oid": "681efe4177a50309724b3596"
+  },
+  "idCliente": "1314",
+  "monto": 25.5,
+  "concepto": "Primer compra",
+  "cantidadProductos": 15,
+  "emisor": "Cesar",
+  "receptor": "Andy",
+  "fechaCreacion": {
+    "$date": "2025-05-10T07:20:33.296Z"
+  },
+  "estatusPago": "APLICADO",
+  "folio": "f5e7d1226d4c425494273e873bc00d2b",
+  "_class": "com.microservice.operation.pay.model.Pago"
+},
+{
+  "_id": {
+    "$oid": "681fea11ae4e1f63a928684c"
+  },
+  "idCliente": "1314AA",
+  "monto": 250.5,
+  "concepto": "Primer compra",
+  "cantidadProductos": 15,
+  "emisor": "BAZ",
+  "receptor": "BB",
+  "fechaCreacion": {
+    "$date": "2025-05-11T00:06:41.475Z"
+  },
+  "estatusPago": "PENDIENTE",
+  "folio": "cd56ddfcf0a94dada104b384aaacade9",
+  "_class": "com.operaciones.pagos.model.Pago"
+},
+{
+  "_id": {
+    "$oid": "681fefcfaf4f6433ce2bbbb0"
+  },
+  "idCliente": "123qwe",
+  "monto": 250.5,
+  "concepto": "Primer compra",
+  "cantidadProductos": 15,
+  "emisor": "BAZ",
+  "receptor": "BB",
+  "fechaCreacion": {
+    "$date": "2025-05-11T00:31:10.841Z"
+  },
+  "estatusPago": "PENDIENTE",
+  "folio": "f0993213676e4fae95aaced2b35c8d73",
+  "_class": "com.operaciones.pagos.model.Pago"
+},
+{
+  "_id": {
+    "$oid": "68201bef07486a0e02712fb3"
+  },
+  "idCliente": "we55",
+  "monto": 250.5,
+  "concepto": "Compra de servicios financieron",
+  "cantidadProductos": 15,
+  "emisor": "BAZ",
+  "receptor": "BB",
+  "fechaCreacion": {
+    "$date": "2025-05-11T03:39:27.050Z"
+  },
+  "estatusPago": "PENDIENTE",
+  "folio": "[ad27e11c]",
+  "_class": "com.operaciones.pagos.model.Pago"
+},
+{
+  "_id": {
+    "$oid": "68203d1c7c72e71bca959334"
+  },
+  "idCliente": "we5533",
+  "monto": 250.5,
+  "concepto": "Compra de servicios financieron",
+  "cantidadProductos": 15,
+  "emisor": "BAZ",
+  "receptor": "BB",
+  "fechaCreacion": {
+    "$date": "2025-05-11T06:01:00.192Z"
+  },
+  "estatusPago": "PENDIENTE",
+  "folio": "[a50b6f36]",
+  "_class": "com.microservice.operation.pay.model.Pago"
+},
+{
+  "_id": {
+    "$oid": "68204277510fc05263c194b6"
+  },
+  "idCliente": "we5533gg",
+  "monto": 250.5,
+  "concepto": "Compra de servicios financieron",
+  "cantidadProductos": 15,
+  "emisor": "BAZ",
+  "receptor": "BB",
+  "fechaCreacion": {
+    "$date": "2025-05-11T06:23:50.881Z"
+  },
+  "estatusPago": "PENDIENTE",
+  "folio": "[85c54a73]",
+  "_class": "com.microservice.operation.pay.model.Pago"
+}]
