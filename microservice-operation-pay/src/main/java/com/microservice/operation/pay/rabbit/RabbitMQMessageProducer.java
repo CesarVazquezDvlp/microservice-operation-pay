@@ -18,7 +18,7 @@ public class RabbitMQMessageProducer {
     private String estatusExchange;
 
     @Value("${rabbitmq.routing-key.estatus}")
-    private String estatusRoutingKey; // No es realmente necesario para Fanout, pero buena práctica tenerlo
+    private String estatusRoutingKey;
 
     public RabbitMQMessageProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
