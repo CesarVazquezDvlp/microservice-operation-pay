@@ -1,5 +1,6 @@
 # Microservicio de Pagos
-Este proyecto es un microservicio de Spring Boot que gestiona el procesamiento y el seguimiento del estado de los pagos. 
+*Proyecto para prueba tecnica*
+Es un microservicio de Spring Boot que gestiona el procesamiento y el seguimiento del estado de los pagos. 
 Utiliza RabbitMQ para la comunicación asíncrona con otros servicios.
 
 # Funcionalidades
@@ -9,14 +10,13 @@ Actualización de Estado: Permite actualizar el estado de un pago existente.
 Comunicación Asíncrona: Envía eventos a través de RabbitMQ cuando el estado de un pago cambia.
 
 # Tecnologías Utilizadas
-Java 17
-Spring Boot
-Spring Data JPA
-MongoDB
-RabbitMQ
-Gradle
-Docker
+- Java 17
+- Spring Boot
+- MongoDB
+- RabbitMQ
+- Gradle
+- Docker
 
 # Comentarios
-Opté por dejar toda la lógica en el controlador debido al alcance limitado del proyecto. 
-Si bien es una mejor práctica ubicar esta lógica en un package/clases "service", en este caso prioricé optimizar los tiempos de desarrollo, considerando la simplicidad del escenario.
+Opté por dejar toda la lógica en el controlador debido al alcance del proyecto. 
+Si bien es una mejor práctica ubicar esta lógica en un package/clases "service", en este caso prioricé optimizar los tiempos de desarrollo, considerando el escenario.
